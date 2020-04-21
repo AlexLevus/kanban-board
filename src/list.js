@@ -51,7 +51,10 @@ export default class List {
 
     cards.forEach(card => {
       card.addEventListener('dragstart', DragAndDrop.dragStart)
+      card.addEventListener('dragenter', DragAndDrop.dragEnter)
+      card.addEventListener('dragover', DragAndDrop.dragOver)
       card.addEventListener('dragend', DragAndDrop.dragEnd)
+      card.addEventListener('dragleave', DragAndDrop.dragLeave)
       card.addEventListener('drop', DragAndDrop.dragDropCard)
     })
 
@@ -129,11 +132,11 @@ const getFooterTemplate = (id, arrange, listId) => {
 
   return `
   <div id="footer" class="${className}" data-list-id="${id}">
-    ${id === listId ? addNewCardForm() : listAddBtn(id, arrange)}
+    ${id === listId ? addNewCardForm() : addNewCardBtn(id, arrange)}
   </div>`
 }
 
-const listAddBtn = (id, arrange) => `
+const addNewCardBtn = (id, arrange) => `
   <span class="btn-icon"></span>
   <button type="button" class="btn" data-list-id="${id}" data-arrange="${arrange}" id="add-btn">
     Добавить карточку
@@ -206,7 +209,7 @@ const cleanAllEventListeners = () => {
   document.removeEventListener('click', closeNewCardForm)
 }
 
-const setTextareaListeners = (id) => {
+const setTextareaListeners = id => {
   const addCardTextarea = document.getElementById('add-textarea')
   addCardTextarea.focus()
   setTextareaHeight(addCardTextarea)
@@ -214,7 +217,7 @@ const setTextareaListeners = (id) => {
   addCardTextarea.addEventListener('keydown', e => {
     const { value } = e.target
     if (e.keyCode === 13) {
-      e.preventDefault();
+      e.preventDefault()
       if (value !== '') {
         api.createCard(value, '', id)
         List.renderLists()
@@ -262,7 +265,7 @@ const addNewList = e => {
   addNewListTextarea.addEventListener('keydown', e => {
     const { value } = e.target
     if (e.keyCode === 13) {
-      e.preventDefault();
+      e.preventDefault()
       if (value !== '') {
         api.createList(value)
         List.renderLists()
@@ -302,7 +305,7 @@ const changeName = textarea => {
 
   textarea.addEventListener('keydown', e => {
     if (e.keyCode === 13) {
-      e.preventDefault();
+      e.preventDefault()
       e.target.blur()
     }
   })

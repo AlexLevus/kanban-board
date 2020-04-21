@@ -84,10 +84,6 @@ textarea {
   box-shadow: inset 0 0 0 2px #0079bf;
 }
 
-::placeholder {
-  font-size: 13px
-}
-
 .list__container {
   padding: 10px 4px;
   padding-top: 0;
@@ -191,6 +187,10 @@ textarea {
   background-color: #61bd4f;
 }
 
+.btn-add:active {
+  background-color: #49852e;
+}
+
 .btn-close {
   height: 30px;
   font-family: 'Times New Roman';
@@ -246,16 +246,13 @@ textarea {
   width: 4px;
 }
 
-.hide {
-  opacity: 0.6;
+::placeholder {
+  font-size: 13px;
+  font-weight: normal;
 }
 
 .drag-hovered {
   background-color: #d1d8d2;
-}
-
-.card-drag {
-  cursor: grabbing;
 }
 
 .list__container_hover {
@@ -267,17 +264,12 @@ textarea {
   padding: 4px;
 }
 
-.list-drag-enter::after {
-
-}
-
-.list-drag-enter {
-  background-color: tomato;
-}
-
-.hovered {
+.card-hovered {
   background-color: lightblue;
   box-shadow: 3px 3px 4px rgba(135, 115, 105, 0.49)
 }
 
-#drop * {pointer-events: none;}
+.element-dragged {
+  opacity: 0;
+}
+

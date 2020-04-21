@@ -1,7 +1,7 @@
 {
   "name": "kanban-board",
   "version": "1.0.0",
-  "description": "It is my small implementation of Trello",
+  "description": "Kanban board",
   "main": "app.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlexLevus/trello-clone.git"
+    "url": "git+https://github.com/AlexLevus/kanban-board.git"
   },
   "author": "Aleksandr Levus",
   "license": "ISC",
@@ -26,7 +26,7 @@
     "webpack-dev-server": "^3.10.1"
   },
   "bugs": {
-    "url": "https://github.com/AlexLevus/trello-clone/issues"
+    "url": "https://github.com/AlexLevus/kanban-board/issues"
   },
-  "homepage": "https://github.com/AlexLevus/trello-clone#readme"
+  "homepage": "https://github.com/AlexLevus/kanban-board#readme"
 }

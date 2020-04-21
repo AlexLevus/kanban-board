@@ -2,6 +2,7 @@ import RestClient from './restClient'
 import { getChildNumber } from './utils'
 
 const api = new RestClient('https://perpower.ru/tasks/')
+let draggedElement = null
 
 export default class DragAndDrop {
   static dragStart(e) {
@@ -18,21 +19,25 @@ export default class DragAndDrop {
     e.dataTransfer.setData('elementType', elementType)
 
     setTimeout(() => {
-      this.classList.add('hide')
-      if (elementType === 'list') {
-        const listContainer = this.querySelector('.list__container')
-        listContainer.classList.add('list-drag-hover')
-      }
+      this.classList.add('element-dragged')
     })
+
+    draggedElement = this
   }
 
   static dragEnd(e) {
-    const hoveredCard = document.querySelector('.hovered')
-    if (hoveredCard) {
-      hoveredCard.classList.remove('hovered')
+    const draggedCard = document.querySelector('.element-dragged')
+    const hoveredCard = document.querySelector('.card-hovered')
+
+    if (draggedCard) {
+      draggedCard.classList.remove('element-dragged')
     }
-    this.classList.remove('hide')
-    this.classList.remove('list-drag-hover')
+
+    if (hoveredCard) {
+      hoveredCard.classList.remove('card-hovered')
+    }
+
+    draggedElement = null
   }
 
   static dragOver(e) {
@@ -40,11 +45,13 @@ export default class DragAndDrop {
   }
 
   static dragEnter(e) {
-    this.classList.add('hovered')
+    if (draggedElement.classList.contains('card')) {
+      this.classList.add('card-hovered')
+    }
   }
 
   static dragLeave(e) {
-    this.classList.remove('hovered')
+    this.classList.remove('card-hovered')
   }
 
   static dragDropList(e) {
@@ -56,12 +63,9 @@ export default class DragAndDrop {
     const listContent = this.querySelector('.list__content')
     const dropId = +sourceId.split(elementType)[1]
     const nextDropId = +this.id.split('list')[1]
+    const isCardsInSameList = listContent && parentListId !== listContent.id
 
-    if (
-      elementType === 'card' &&
-      listContent &&
-      parentListId !== listContent.id
-    ) {
+    if (elementType === 'card' && isCardsInSameList) {
       listContent.appendChild(sourceElement)
       api.moveCard(dropId, nextDropId)
     }
