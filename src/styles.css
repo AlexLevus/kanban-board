@@ -6,6 +6,7 @@ body {
 body {
   background-color: rgb(0, 121, 191);
   overflow: hidden;
+  zoom: 0.9;
 }
 
 * {
@@ -43,7 +44,7 @@ textarea {
 }
 
 .list {
-  height: 95vh;
+  height: 105vh;
 
   display: block;
   border-radius: 3px;
