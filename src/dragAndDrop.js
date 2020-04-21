@@ -98,12 +98,17 @@ export default class DragAndDrop {
       const dropCardNumber = getChildNumber(sourceElement)
       const nextCardNumber = getChildNumber(this)
 
-      if (nextCardNumber > dropCardNumber) {
-        parent.insertBefore(sourceElement, this.nextSibling)
+      if(parent === sourceElement.parentElement) {
+        if (nextCardNumber > dropCardNumber) {
+          parent.insertBefore(sourceElement, this.nextSibling)
+        } else {
+          parent.insertBefore(sourceElement, this)
+        }
       } else {
         parent.insertBefore(sourceElement, this)
       }
 
+    
       const dropId = sourceId.split('card')[1]
       const nextId = this.id.split('card')[1]
       const nextParentId = parent.id.split('list')[1]
